@@ -57,6 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\AsteroidControl.cs" />
+    <Compile Include="Assets\Scripts\PlayerShipControl.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

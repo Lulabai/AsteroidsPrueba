@@ -9,7 +9,7 @@ public class AsteroidControl : MonoBehaviour
 
 
     // Creamos condición para delimitar el movimiento del asteroide
-    public float xLimit = 20.0f, yLimit = 9.0f;
+    public float xLimit = 11.0f, yLimit = 6.8f;
 
 
 
@@ -32,11 +32,6 @@ public class AsteroidControl : MonoBehaviour
 
         // Si queremos que solo se ejecute una vez el cambio de posición, entonces indicamos en la función de START: transform.position = new Vector3(xPos, yPos, 0.0f);
         // Si no, lo indicaremos también en el UPDATE
-
-
-        print("Posiciones");
-        Debug.Log(xPos);
-        Debug.Log(yPos);
 
     }
 
@@ -103,8 +98,6 @@ public class AsteroidControl : MonoBehaviour
         if (xPos < -xLimit) xSpeed = Mathf.Abs(xSpeed);
 
 
-        Debug.Log(xLimit);
-        Debug.Log(yLimit);
         // Para y, otra forma que también es correcta:
 
         if (yPos > yLimit)

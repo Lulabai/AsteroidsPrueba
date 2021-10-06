@@ -5,37 +5,53 @@ using UnityEngine;
 public class PlayerShipControl : MonoBehaviour
 {
 
-    public float xSpeed = 1.0f, ySpeed = 1.0f;
+    public float rotSpeed = 180.0f, ySpeed = 1.0f;
+    public float xLimit = 11.0f, yLimit = 6.8f;
 
+    private float playerRot;
     private float xPos, yPos;
 
     // Start is called before the first frame update
     void Start()
     {
-        xPos = transform.position.x;
-        yPos = transform.position.y;
+        // Asginar mi rotación z actual a playerRot
+        playerRot = transform.eulerAngles.z; // Atención: transform.rotation.z no funcionará
     }
 
     // Update is called once per frame
     void Update()
     {
 
-        // Cambiamos xPos e yPos en función del input del usuario y la velocidad
-        
-        xPos += Input.GetAxis("Horizontal") * xSpeed * Time.deltaTime;
-        yPos += Input.GetAxis("Vertical") * ySpeed * Time.deltaTime;
+        // Rotamons la nave en función de rotSpeed y el input del usuario
+        playerRot -= rotSpeed * Input.GetAxis("Horizontal") * Time.deltaTime;
 
-        
+        // Actualizamos la rotación de la nave
+        transform.rotation = Quaternion.Euler(0.0f, 0.0f, playerRot); // Atención: No new Vector3
 
- 
-            print("Posiciones");
-            Debug.Log(xPos);
-            Debug.Log(yPos);
-       
 
-        // Aplicar xPos e yPos a la posición de la nave
-        transform.position = new Vector3(xPos, yPos, 0.0f);
+        // EJERCICIO: Mover la nave adelante y atrás utilizando transform.up, ySpeed, Input.GetAxis
+        transform.position += Input.GetAxis("Vertical") * Time.deltaTime * ySpeed * transform.up;
 
+
+        // Aplicamos el control de límites
+        LimitsControl();
     }
+
+    void LimitsControl()
+    {
+        // Obtenemos xPos e yPos a partir de la posición real
+        xPos = transform.position.x;
+        yPos = transform.position.y;
+
+
+        if (xPos > xLimit) xPos = -xLimit;
+        else if (xPos < -xLimit) xPos = xLimit;
+
+        if (yPos > yLimit) yPos = -yLimit;
+        else if (yPos < -yLimit) yPos = yLimit;
+
+        // Aplicamos de nuevo xPos e yPos a la posición real
+        transform.position = new Vector3(xPos, yPos, 0.0f);
    
+    }
 }

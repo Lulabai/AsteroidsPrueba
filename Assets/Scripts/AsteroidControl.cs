@@ -33,6 +33,11 @@ public class AsteroidControl : MonoBehaviour
         // Si queremos que solo se ejecute una vez el cambio de posición, entonces indicamos en la función de START: transform.position = new Vector3(xPos, yPos, 0.0f);
         // Si no, lo indicaremos también en el UPDATE
 
+
+        print("Posiciones");
+        Debug.Log(xPos);
+        Debug.Log(yPos);
+
     }
 
     // Update is called once per frame

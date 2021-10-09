@@ -56,8 +56,11 @@
     <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\AsteroidControl.cs" />
+    <Compile Include="Assets\Scripts\BulletControl.cs" />
     <Compile Include="Assets\Scripts\PlayerShipControl.cs" />
+    <Compile Include="Assets\Scripts\AutoDestroy.cs" />
+    <Compile Include="Assets\Scripts\AsteroidControl.cs" />
+    <Compile Include="Assets\Scripts\CanonControl.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

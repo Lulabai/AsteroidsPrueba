@@ -16,6 +16,10 @@ public class AsteroidControl : MonoBehaviour
     // Vamos a crear un boleano para el rebote
     public bool asteroidBounce;
 
+    // 15/10 
+    private int asteroidLife = 5;
+
+
 
     // Vamos a crear dos variables: xPos e yPos
     // Estas variables serán privadas para que no se puedan cambiar desde Unity
@@ -53,6 +57,16 @@ public class AsteroidControl : MonoBehaviour
         transform.position = new Vector3(xPos, yPos, 0.0f);
     }
 
+    // 15/10 colisiones
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        //print("Me han dado, el culpable es " + collision.tag);
+
+        //EJERCICIO: Si la colisión es con una bala, generamos una explosión y destruimos el asteroide
+
+
+    }
     // Creamos una nueva función que se llama LimitsControl
     void LimitsControl()
     {

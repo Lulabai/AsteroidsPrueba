@@ -11,6 +11,9 @@ public class PlayerShipControl : MonoBehaviour
     private float playerRot;
     private float xPos, yPos;
 
+    //15/10
+    public GameObject explosion;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -35,6 +38,16 @@ public class PlayerShipControl : MonoBehaviour
 
         // Aplicamos el control de límites
         LimitsControl();
+    }
+
+    //15/10
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.tag == "Asteroid")
+        {
+            Instantiate(explosion, transform.position, transform.rotation);
+            Destroy(gameObject);
+        }
     }
 
     void LimitsControl()

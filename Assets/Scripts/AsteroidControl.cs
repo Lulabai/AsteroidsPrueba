@@ -7,19 +7,22 @@ public class AsteroidControl : MonoBehaviour
     // Vamos a crear dos nuevas variables, xSpeed e ySpeed
     public float xSpeed = 1f, ySpeed = 1f;
 
+    //15/10
+    public bool randomSpeed;
+
 
     // Creamos condición para delimitar el movimiento del asteroide
     public float xLimit = 11.0f, yLimit = 6.8f;
 
-
-
     // Vamos a crear un boleano para el rebote
     public bool asteroidBounce;
 
+
     // 15/10 
-    private int asteroidLife = 5;
-
-
+    public bool createChildren;
+    public GameObject theChildren;
+    public GameObject explosion;
+    public int energy = 3;
 
     // Vamos a crear dos variables: xPos e yPos
     // Estas variables serán privadas para que no se puedan cambiar desde Unity
@@ -29,6 +32,14 @@ public class AsteroidControl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //Si es necesario asignamos una velocidad aleatoria
+        if (randomSpeed)
+        {
+            xSpeed = Random.Range(-xSpeed, xSpeed);
+            ySpeed = Random.Range(-ySpeed, ySpeed);
+        }
+
+
         //vamos a asignar a xPos mi posición inicial en x, y lo mismo con y
         xPos = transform.position.x;
         yPos = transform.position.y;
@@ -61,11 +72,33 @@ public class AsteroidControl : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        //print("Me han dado, el culpable es " + collision.tag);
+        print("Me han dado, el culpable es " + collision.tag);
 
-        //EJERCICIO: Si la colisión es con una bala, generamos una explosión y destruimos el asteroide
+        //Si la colisión es con una bala, generamos una explosión y destruimos el asteroide
+        if(collision.CompareTag("PlayerBullet"))
+        {
 
+            print(energy);
+            //Reducimos la energia, y si es menor o igual a 0, explotamos:
+            energy--; //Es lo mismo que energy -=1;
 
+            if(energy <= 0)
+            {
+                //EJERCICIO: Crear dos asteroides más pequeños. Si el asteroide es pequeño, no crear nada
+                if(createChildren)
+                {
+
+                    GameObject meteor1 = Instantiate(theChildren, transform.position, transform.rotation);
+                    GameObject meteor2 = Instantiate(theChildren, transform.position, transform.rotation);
+
+                    // Movemos la posicion del segundo asteroide en relación a la posición del primero
+                    meteor2.transform.Translate(transform.position.x+5, transform.position.y+5, transform.position.z);
+                }
+
+                Instantiate(explosion, transform.position, transform.rotation);
+                Destroy(gameObject);
+            }
+        }
     }
     // Creamos una nueva función que se llama LimitsControl
     void LimitsControl()
